@@ -1,0 +1,11 @@
+{
+  "name": "retry-agent",
+  "version": "1.0.0",
+  "description": "Promise-based retry module with several strategies.",
+  "main": "./index",
+  "scripts": {
+    "test": "node ./tests/index"
+  },
+  "author": "SeizedThoughts",
+  "license": "MIT"
+}
