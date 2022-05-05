@@ -13,14 +13,16 @@ function RetryAgent(config = {}){
     delete config.strategy;
 
     function retry(strategy, config, attempt, _function, ...args){
-        return new Promise((resolve, reject) => {
-            _function(...args).then(resolve).catch((err) => {
+        return new Promise(async (resolve, reject) => {
+            try{
+                resolve(await _function(...args));
+            }catch(err){
                 if(config.retries === -1 || attempt <= config.retries){
                     strategy(config, attempt).then(() => {
                         retry(strategy, config, attempt + 1, _function, ...args).then(resolve).catch(reject);
                     });
                 }else reject(err);
-            })
+            }
         });
     }
 
