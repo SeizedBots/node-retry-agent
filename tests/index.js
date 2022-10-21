@@ -1,4 +1,4 @@
-const {delay, RetryAgent, Strategies} = require('../index');
+const {delay, RetryAgent, Strategies} = require('../src/index');
 
 var maxTries = 5;
 var tries = 0;
@@ -15,21 +15,21 @@ function testFunction(){
 delay(1000).then(() => {
     console.log('Waited 1000 ms!');
     
-    const retry = new RetryAgent();
+    const agent = new RetryAgent();
     
-    retry.execute(testFunction).then(console.log).catch(console.log).then(() => {
-        retry.strategy = Strategies.LinearBackOff;
-        retry.config.maxTimeout = 10 * 1000;
+    agent.execute(testFunction).then(console.log).catch(console.log).then(() => {
+        agent.strategy = Strategies.LinearBackOff;
+        agent.config.maxTimeout = 10 * 1000;
 
         tries = 0;
         
-        retry.execute(testFunction).then(console.log).catch(console.log).then(() => {
-            retry.strategy = Strategies.ExponentialBackOff;
-            retry.config.maxTimeout = 10 * 1000;
+        agent.execute(testFunction).then(console.log).catch(console.log).then(() => {
+            agent.strategy = Strategies.ExponentialBackOff;
+            agent.config.maxTimeout = 10 * 1000;
     
             tries = 0;
             
-            retry.execute(testFunction).then(console.log).catch(console.log);
+            agent.execute(testFunction).then(console.log).catch(console.log);
         });
     });
 });
