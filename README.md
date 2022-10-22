@@ -44,6 +44,10 @@ These can be accessed and changed at any time by accessing the `config` property
 A strategy can be passed to the constructor under the `strategy` property, defaulting to `Strategies.ConstantBackOff`.
 This property can be accessed and changed at any time by accessing the `strategy` property of the agent.
 
+- [Constant Back Off](#constant-back-off)
+- [Exponential Back Off](#exponential-back-off)
+- [Linear Back Off](#linear-back-off)
+
 ### Constant Back Off
 
 This strategy (`Strategies.ConstantBackOff`) will retry with a constant delay between each attempt using the `minTimeout` value.
@@ -58,7 +62,38 @@ If `retries` is set to `-1`, `maxTimeout` will be ignored, with the timeout bein
 This strategy (`Strategies.ExponentialBackOff`) will retry with linearly increasing delays between retries until reaching `maxTimeout` on the final retry.
 If `retries` is set to `-1`, `maxTimeout` will be ignored, increasing by `minTimeout` each subsequent retry.
 
-### Strategy Interface
+# Usage
+
+- [Create](#create)
+- [Execute](#execute)
+
+## Create
+
+This takes a function that returns a promise as an input and returns a new function that executes the code in the given function using the `RetryAgent`'s current `Strategy`.
+(NOTE: When the `Strategy` changes for a `RetryAgent`, functions created with that `RetryAgent` will use the new `Strategy`.)
+
+```js
+const getExample = agent.create(() => {
+    return new Promise((resolve, reject) => {
+        axios.get('https://example.com').then(resolve).catch(reject);
+    });
+});
+```
+
+## Execute
+
+This is a helper method that [Create](#create)s and executes the given function using the current `Strategy`.
+(NOTE: When the `Strategy` changes for a `RetryAgent`, functions created with that `RetryAgent` will use the new `Strategy`.)
+
+```js
+agent.execute((resource) => {
+    return new Promise((resolve, reject) => {
+        axios.get(`https://example.com/${resource}`).then(resolve).catch(reject);
+    });
+}, 'stuff');
+```
+
+# Strategy Interface
 
 The `Strategy` interface is very simple, taking in a `config` from a `RetryAgent` and the retry attempt number ([1, `config.retry`]).
 
@@ -74,14 +109,14 @@ function myStrategy(config, attempt){
 
 Feel free to make a pull request adding any strategies that might be useful [here](https://github.com/SeizedBots/retry-agent/pulls)!
 
-### Delay
+# Delay
 
 The function `delay` is a promise-based alternative to `setTimeout`.
 It takes only a timeout in milliseconds as an input and returns a promise that resolves after said timeout.
 
-### Access Patterns
+# Access Patterns
 
-The `retry-agent` module exports an the following:
+The `retry-agent` module exports the following:
 
 ```js
 {
@@ -91,6 +126,6 @@ The `retry-agent` module exports an the following:
 }
 ```
 
-### Contributing
+# Contributing
 
 If you would like to contribute or create an issue, please do so at the official [GitHub page](https://github.com/SeizedBots/retry-agent).
