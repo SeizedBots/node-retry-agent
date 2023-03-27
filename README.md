@@ -3,13 +3,13 @@
 Using npm:
 
 ```bash
-$ npm install retry-agent
+npm install retry-agent
 ```
 
 Using git:
 
 ```bash
-$ git clone https://github.com/SeizedBots/node-retry-agent.git
+git clone https://github.com/SeizedBots/node-retry-agent.git
 ```
 
 # Getting Started
