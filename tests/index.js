@@ -18,13 +18,13 @@ delay(1000).then(() => {
     const agent = new RetryAgent();
     
     agent.execute(testFunction).then(console.log).catch(console.log).then(() => {
-        agent.strategy = Strategies.LinearBackOff;
+        agent.config.strategy = Strategies.LinearBackOff;
         agent.config.maxTimeout = 10 * 1000;
 
         tries = 0;
         
         agent.execute(testFunction).then(console.log).catch(console.log).then(() => {
-            agent.strategy = Strategies.ExponentialBackOff;
+            agent.config.strategy = Strategies.ExponentialBackOff;
             agent.config.maxTimeout = 10 * 1000;
     
             tries = 0;

@@ -2,15 +2,12 @@ const Strategies = require('./Strategies');
 
 function RetryAgent(config = {}){
     this.config = Object.assign({
+        strategy: Strategies.ConstantBackOff,
         minTimeout: 1000,
         maxTimeout: 1000,
         randomize: false,
         retries: 5
     }, config);
-
-    this.strategy = config.strategy || Strategies.ConstantBackOff;
-
-    delete config.strategy;
 
     function retry(strategy, config, attempt, _function, ...args){
         return new Promise(async (resolve, reject) => {
@@ -28,7 +25,7 @@ function RetryAgent(config = {}){
 
     this.create = (_function) => {
         return (...args) => {
-            return retry(this.strategy, this.config, 1, _function, ...args);
+            return retry(this.config.strategy, this.config, 1, _function, ...args);
         }
     }
 

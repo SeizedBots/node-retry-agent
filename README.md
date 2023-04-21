@@ -30,6 +30,7 @@ There are several options, passed by value, available for instantiating a RetryA
 
 ```js
 new RetryAgent({
+    strategy: Strategies.ConstantBackOff, //see Constant Back Off in Strategies
     minTimeout: 1000, //min time a between retries (assuming randomized is false) in milliseconds
     maxTimeout: 1000, //max time a between retries (assuming randomized is false) in milliseconds
     randomize: false, //if timing should be slightly randomized (up to minTimeout / 2 more or less for standard strategies)
