@@ -26,7 +26,7 @@ const agent = new RetryAgent();
 
 # Config
 
-There are several options, passed by value, available for instantiating a RetryAgent. (Listed values are default.)
+There are several options, passed by value, available for instantiating a `RetryAgent`. (Listed values are default.)
 
 ```js
 new RetryAgent({
