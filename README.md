@@ -1,3 +1,7 @@
+# Usage
+
+`RetryAgent` is a lightweight package for managing retries of functions that return promises. 
+
 # Installing
 
 Using npm:
@@ -63,7 +67,7 @@ If `retries` is set to `-1`, `maxTimeout` will be ignored, with the timeout bein
 This strategy (`Strategies.ExponentialBackOff`) will retry with linearly increasing delays between retries until reaching `maxTimeout` on the final retry.
 If `retries` is set to `-1`, `maxTimeout` will be ignored, increasing by `minTimeout` each subsequent retry.
 
-# Usage
+# Methods
 
 - [Create](#create)
 - [Execute](#execute)
