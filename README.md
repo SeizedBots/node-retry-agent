@@ -1,6 +1,6 @@
 # Usage
 
-`RetryAgent` is a lightweight package for managing retries of functions that return promises. 
+`retry-agent` is a lightweight package for managing retries of functions that return promises. 
 
 # Installing
 
