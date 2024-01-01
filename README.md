@@ -108,7 +108,7 @@ function myStrategy(config, attempt){
 }
 ```
 
-Feel free to make a pull request adding any strategies that might be useful [here](https://github.com/SeizedBots/retry-agent/pulls)!
+Feel free to make a pull request adding any strategies that might be useful [here](https://github.com/SeizedBots/node-retry-agent/pulls)!
 
 # Delay
 
@@ -129,4 +129,4 @@ The `retry-agent` module exports the following:
 
 # Contributing
 
-If you would like to contribute or create an issue, please do so at the official [GitHub page](https://github.com/SeizedBots/retry-agent).
+If you would like to contribute or create an issue, please do so at the official [GitHub page](https://github.com/SeizedBots/node-retry-agent).
